@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,7 +14,12 @@ import javax.swing.SwingConstants;
 
 public class VentanaCalculadora extends JFrame{
     public JPanel panel; 
-    JTextField caja;
+    JLabel caja, caja2;
+    
+    private boolean igual, inicio = true, operacion1, operacion2;
+    private double a, b, c, memoria=0, resultado, valor1, valor2;
+    private String cadena, funciones, tiopooperacion;
+    
     public VentanaCalculadora(){
         this.setSize(600, 600);
         this.setLocationRelativeTo(null);
@@ -48,9 +52,14 @@ public class VentanaCalculadora extends JFrame{
         panel.add(label);
         
         //CREACIÓN CAJA DE TEXTO
-        caja = new JTextField();
-        caja.setBounds(150, 85, 300, 30);
+        caja = new JLabel();
+        caja.setBounds(150, 100, 300, 30);
+        caja.setBackground(Color.white);
         panel.add(caja);
+        caja2 = new JLabel();
+        caja2.setBounds(150, 70, 300, 30);
+        caja2.setBackground(Color.white);
+        panel.add(caja2);
     }
     
     private void IniciarButtons(){
@@ -62,7 +71,13 @@ public class VentanaCalculadora extends JFrame{
         boton1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "1"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("1");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "1");
+                }
             }
         });
         panel.add(boton1);
@@ -73,7 +88,13 @@ public class VentanaCalculadora extends JFrame{
         boton2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "2"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("2");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "2");
+                }
             }
         });
         panel.add(boton2);
@@ -85,7 +106,13 @@ public class VentanaCalculadora extends JFrame{
         boton3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "3"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("3");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "3");
+                }
             }
         });
         panel.add(boton3);
@@ -98,7 +125,7 @@ public class VentanaCalculadora extends JFrame{
         botonparentesis1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "("));
+                
             }
         });
         panel.add(botonparentesis1);
@@ -111,7 +138,7 @@ public class VentanaCalculadora extends JFrame{
         botonparentesis2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), ")"));
+                
             }
         });
         panel.add(botonparentesis2);
@@ -124,7 +151,13 @@ public class VentanaCalculadora extends JFrame{
         boton4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "4"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("4");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "4");
+                }
             }
         });
         panel.add(boton4);
@@ -137,7 +170,13 @@ public class VentanaCalculadora extends JFrame{
         boton5.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "5"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("5");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "5");
+                }
             }
         });
         panel.add(boton5);
@@ -150,7 +189,13 @@ public class VentanaCalculadora extends JFrame{
         boton6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "5"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("6");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "6");
+                }
             }
         });
         panel.add(boton6);
@@ -163,7 +208,25 @@ public class VentanaCalculadora extends JFrame{
         botondivision.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "/"));
+                igual = true;
+                inicio = true;
+                if(operacion1 = true){
+                    valor1 = Double.parseDouble(caja.getText());
+                    caja2.setText("");
+                    caja2.setText(caja.getText() +"/");
+                    operacion1 = false;
+                }else{
+                    if(operacion2 == true){
+                        valor2 = Double.parseDouble(caja.getText());
+                        caja2.setText("");
+                        caja2.setText(caja.getText() +"/");
+                        operacion2 = false;
+                    }else{
+                        caja2.setText(caja.getText() +"/");
+                        Calcular(resultado, valor2);
+                    }
+                }
+                tiopooperacion = "/";
             }
         });
         panel.add(botondivision);
@@ -176,7 +239,25 @@ public class VentanaCalculadora extends JFrame{
         botonmultiplicacion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "*"));
+                igual = true;
+                inicio = true;
+                if(operacion1 = true){
+                    valor1 = Double.parseDouble(caja.getText());
+                    caja2.setText("");
+                    caja2.setText(caja.getText() +"*");
+                    operacion1 = false;
+                }else{
+                    if(operacion2 == true){
+                        valor2 = Double.parseDouble(caja.getText());
+                        caja2.setText("");
+                        caja2.setText(caja.getText() +"*");
+                        operacion2 = false;
+                    }else{
+                        caja2.setText(caja.getText() +"*");
+                        Calcular(resultado, valor2);
+                    }
+                }
+                tiopooperacion = "*";
             }
         });
         panel.add(botonmultiplicacion);
@@ -189,7 +270,13 @@ public class VentanaCalculadora extends JFrame{
         boton7.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "7"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("7");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "7");
+                }
             }
         });
         panel.add(boton7);
@@ -201,7 +288,13 @@ public class VentanaCalculadora extends JFrame{
         boton8.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "7"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("8");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "8");
+                }
             }
         });
         panel.add(boton8);
@@ -213,7 +306,13 @@ public class VentanaCalculadora extends JFrame{
         boton9.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "9"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("9");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "9");
+                }
             }
         });
         panel.add(boton9);
@@ -225,7 +324,25 @@ public class VentanaCalculadora extends JFrame{
         botonsuma.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "+"));
+                igual = true;
+                inicio = true;
+                if(operacion1 = true){
+                    valor1 = Double.parseDouble(caja.getText());
+                    caja2.setText("");
+                    caja2.setText(caja.getText() +"+");
+                    operacion1 = false;
+                }else{
+                    if(operacion2 == true){
+                        valor2 = Double.parseDouble(caja.getText());
+                        caja2.setText("");
+                        caja2.setText(caja.getText() +"+");
+                        operacion2 = false;
+                    }else{
+                        caja2.setText(caja.getText() +"+");
+                        Calcular(resultado, valor2);
+                    }
+                }
+                tiopooperacion = "+";
             }
         });
         panel.add(botonsuma);
@@ -237,7 +354,25 @@ public class VentanaCalculadora extends JFrame{
         botonresta.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "-"));
+                igual = true;
+                inicio = true;
+                if(operacion1 = true){
+                    valor1 = Double.parseDouble(caja.getText());
+                    caja2.setText("");
+                    caja2.setText(caja.getText() +"-");
+                    operacion1 = false;
+                }else{
+                    if(operacion2 == true){
+                        valor2 = Double.parseDouble(caja.getText());
+                        caja2.setText("");
+                        caja2.setText(caja.getText() +"-");
+                        operacion2 = false;
+                    }else{
+                        caja2.setText(caja.getText() +"-");
+                        Calcular(resultado, valor2);
+                    }
+                }
+                tiopooperacion = "-";
             }
         });
         panel.add(botonresta);
@@ -251,7 +386,13 @@ public class VentanaCalculadora extends JFrame{
         boton0.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "0"));
+                if(inicio == true){
+                    caja.setText("");
+                    caja.setText("0");
+                    inicio = false;
+                }else{
+                    caja.setText(caja.getText() + "0");
+                }
             }
         });
         panel.add(boton0);
@@ -264,9 +405,53 @@ public class VentanaCalculadora extends JFrame{
         botonigual.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent ae) {
-                caja.setText(Operaciones.mostrarTexto(caja.getText(), "="));
+                inicio = true;
+                operacion1 = true;
+                if(igual == true){
+                    if(tiopooperacion == null){
+                        
+                    }else{
+                        valor2 = Double.parseDouble(caja.getText());
+                        caja2.setText(caja2.getText() + caja.getText());
+                        Calcular(valor1, valor2);
+                        igual = false;
+                    }
+                }else{
+                    caja2.setText("");
+                    Calcular(valor1, valor2);
+                }
             }
         });
         panel.add(botonigual);
+    }
+    
+    public void Calcular(double resultado, double valor2) {
+        switch(tiopooperacion){
+            case "+":
+                resultado = valor1 + valor2;
+                caja.setText(resultado + "");
+                valor1 = Double.parseDouble(caja.getText());
+                break;
+            case "-":
+                resultado = valor1 - valor2;
+                caja.setText(resultado + "");
+                valor1 = Double.parseDouble(caja.getText());
+                break;
+            case "*":
+                resultado = valor1 * valor2;
+                caja.setText(resultado + "");
+                valor1 = Double.parseDouble(caja.getText());
+                break;
+            case "/":
+                if(valor2 == 0){
+                    caja.setText("Error. No se puede divir con ceros");
+                    break;
+                }else{
+                    resultado = valor1 / valor2;
+                    caja.setText(resultado + "");
+                    valor1 = Double.parseDouble(caja.getText());
+                    break;
+                }
+        }
     }
 }
